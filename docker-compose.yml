@@ -3,7 +3,8 @@ version: '3.9'
 services:
   rails:
     build:
-      context: ./covena-ai
+      context: .
+    command: bash -c "rm -f tmp/pids/server.pid && rails s -b 0.0.0.0"
     ports:
       - "3000:3000"
     depends_on:
@@ -11,21 +12,35 @@ services:
       - analyzer
     environment:
       - DATABASE_URL=postgres://postgres@postgres:5432/covena_ai_development
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE_DUMMY}
+      - RAILS_LOG_TO_STDOUT=${RAILS_LOG_TO_STDOUT}
+      - PG_USER_NAME=${PG_USER_NAME}
+      - PG_USER_PASSWORD=${PG_USER_PASSWORD}
+      - PG_HOST=postgres
     volumes:
-      - ./covena-ai:/app
+      - .:/app
 
   postgres:
-    image: postgres:14
+    image: postgres:15
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: ${PG_USER_NAME}
+      POSTGRES_PASSWORD: ${PG_USER_PASSWORD}
+      POSTGRES_DB: covena_ai_development
+      POSTGRES_HOST_AUTH_METHOD: ${POSTGRES_HOST_AUTH_METHOD}
     volumes:
       - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER_NAME} -d covena_ai_development"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   analyzer:
     build:
       context: ./services/analyzer
     ports:
-      - "5001:5001"
+      - "5432:5432"
+
 
 volumes:
   pg_data:

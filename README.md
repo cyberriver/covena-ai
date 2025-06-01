@@ -1,24 +1,19 @@
-# README
+# FinAnalyzerAI
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+🧠 Финансовый анализ PDF-отчетности с помощью AI и расчётов на Python.  
+📊 Ввод: PDF с 1 и 2 формами отчётности.  
+📈 Вывод: автоматический расчёт показателей (EBITDA, Net Debt/EBITDA и др.).
 
-Things you may want to cover:
+## 🚀 Стек технологий
+- Ruby on Rails — веб-интерфейс и API
+- Python — расчёты и обработка PDF
+- PyTorch + transformers — ML для извлечения данных
+- Docker — контейнеризация
+- Pandas, openpyxl — для Excel и расчётов
 
-* Ruby version
+## 📦 Установка
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+git clone https://github.com/cyberriver/FinAnalyzerAI.git
+cd FinAnalyzerAI
+cp .
