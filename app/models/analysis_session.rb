@@ -1,0 +1,2 @@
+class AnalysisSession < ApplicationRecord
+end

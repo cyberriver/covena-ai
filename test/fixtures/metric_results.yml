@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  analysis_session: one
+  metric: MyString
+  value: MyString
+  explanation: MyText
+
+two:
+  analysis_session: two
+  metric: MyString
+  value: MyString
+  explanation: MyText

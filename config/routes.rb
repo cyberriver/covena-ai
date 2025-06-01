@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   post '/analyze', to: 'calculations#analyze'
   get '/analyze', to: 'calculations#form'
+  get '/history', to: 'sessions#history'
+
 end
   
 

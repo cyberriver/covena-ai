@@ -1,0 +1,13 @@
+<h1>История анализов</h1>
+
+<% @sessions.each do |sess| %>
+  <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+    <p><strong>Дата:</strong> <%= sess.created_at.strftime("%d.%m.%Y %H:%M") %></p>
+    <ul>
+      <% sess.metric_results.each do |m| %>
+        <li><strong><%= m.metric %></strong>: <%= m.value %><br/><small><%= m.explanation %></small></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
