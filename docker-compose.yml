@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  rails:
+    build:
+      context: ./covena-ai
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - analyzer
+    environment:
+      - DATABASE_URL=postgres://postgres@postgres:5432/covena_ai_development
+    volumes:
+      - ./covena-ai:/app
+
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  analyzer:
+    build:
+      context: ./services/analyzer
+    ports:
+      - "5001:5001"
+
+volumes:
+  pg_data:

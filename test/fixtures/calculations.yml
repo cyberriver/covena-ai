@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  metric: MyString
+  value: 9.99
+  explanation: MyText
+  session: one
+
+two:
+  metric: MyString
+  value: 9.99
+  explanation: MyText
+  session: two
