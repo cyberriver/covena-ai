@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_01_193226) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_01_193844) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_193226) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["session_id"], name: "index_calculations_on_session_id"
+  end
+
+  create_table "chat_messages", force: :cascade do |t|
+    t.bigint "analysis_session_id", null: false
+    t.string "role"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["analysis_session_id"], name: "index_chat_messages_on_analysis_session_id"
   end
 
   create_table "metric_results", force: :cascade do |t|
@@ -55,6 +64,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_193226) do
   end
 
   add_foreign_key "calculations", "sessions"
+  add_foreign_key "chat_messages", "analysis_sessions"
   add_foreign_key "metric_results", "analysis_sessions"
   add_foreign_key "uploaded_documents", "sessions"
 end

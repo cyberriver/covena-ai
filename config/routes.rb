@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/analyze', to: 'calculations#form'
   get '/history', to: 'sessions#history'
 
+  resources :chat, only: [:index, :create]
+
 end
   
 

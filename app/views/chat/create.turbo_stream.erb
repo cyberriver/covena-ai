@@ -1,0 +1,2 @@
+<%= turbo_stream.append "chat", partial: "chat/message", locals: { message: @message } %>
+<%= turbo_stream.append "chat", partial: "chat/message", locals: { message: @session.chat_messages.last } %>

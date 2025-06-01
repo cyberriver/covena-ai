@@ -1,0 +1,18 @@
+<h1>🧠 Covena AI — Финансовый ассистент</h1>
+
+<div id="chat" class="chat-box">
+  <%= turbo_stream_from "chat" %>
+
+  <% @messages.each do |msg| %>
+    <div class="<%= msg.role == 'user' ? 'user-msg' : 'ai-msg' %>">
+      <p><strong><%= msg.role.capitalize %>:</strong> <%= msg.content %></p>
+    </div>
+  <% end %>
+</div>
+
+<%= form_with model: @message, url: chat_index_path, method: :post, data: { turbo_frame: "_top" } do |f| %>
+  <div class="form-group">
+    <%= f.text_area :content, rows: 2, placeholder: "Введите вопрос или уточнение..." %>
+  </div>
+  <%= f.submit "Отправить", class: "btn btn-primary" %>
+<% end %>

@@ -3,6 +3,20 @@ from metrics import calculate_metrics
 
 app = Flask(__name__)
 
+@app.route("/chat", methods=["POST"])
+def chat():
+    prompt = request.json.get("prompt", "")
+    
+    # Упрощённый ответ (позже можно подключить OpenAI, LLaMA, ML-модель)
+    if "EBITDA" in prompt.upper():
+        reply = "EBITDA = Операционная прибыль + Амортизация."
+    else:
+        reply = "Пожалуйста, уточните вопрос или загрузите PDF."
+
+    return jsonify({"reply": reply})
+
+
+
 @app.route('/analyze', methods=['POST'])
 def analyze():
     file1 = request.files.get('form1')
