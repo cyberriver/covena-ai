@@ -10,6 +10,7 @@
 - PyTorch + transformers — ML для извлечения данных
 - Docker — контейнеризация
 - Pandas, openpyxl — для Excel и расчётов
+- Ollama - ML модели
 
 ## 📦 Установка
 
@@ -17,3 +18,8 @@
 git clone https://github.com/cyberriver/FinAnalyzerAI.git
 cd FinAnalyzerAI
 cp .
+
+для установки Ollama
+curl -fsSL https://ollama.com/install.sh | sh
+
+используется модель Llama3

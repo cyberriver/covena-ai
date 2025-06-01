@@ -19,6 +19,21 @@ def chat():
 def ping():
     return jsonify({"status": "ok"})
 
+@app.route("/health", methods=["GET"])
+def health():
+    try:
+        test = requests.post("http://ollama:11434/api/generate", json={
+            "model": "llama3",
+            "prompt": "ping",
+            "stream": False
+        }, timeout=3)
+        if test.ok:
+            return jsonify({"llama3": "online"})
+    except Exception as e:
+        return jsonify({"llama3": "unreachable", "error": str(e)}), 503
+
+    return jsonify({"llama3": "error"}), 500
+
 @app.route('/analyze', methods=['POST'])
 def analyze():
     file1 = request.files.get('form1')
