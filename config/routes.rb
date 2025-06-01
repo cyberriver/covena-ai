@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root to: "sessions#index"
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :sessions, only: [:index, :show]
   resources :uploads, only: [:create]
   resources :calculations, only: [:create]
   require 'sidekiq/web'
@@ -12,6 +11,9 @@ Rails.application.routes.draw do
   get '/history', to: 'sessions#history'
 
   resources :chat, only: [:index, :create]
+  resources :sessions do
+    resources :chat_messages, only: [:create]
+  end
 
 end
   

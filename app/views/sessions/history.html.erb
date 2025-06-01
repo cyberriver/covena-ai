@@ -2,7 +2,13 @@
 
 <% @sessions.each do |sess| %>
   <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+   <h3>Session <%= session.id %></h3>
     <p><strong>Дата:</strong> <%= sess.created_at.strftime("%d.%m.%Y %H:%M") %></p>
+     <% session.chat_messages.each do |msg| %>
+      <div class="message">
+        <strong><%= msg.author %>:</strong>
+        <%= msg.content %>
+      </div>
     <ul>
       <% sess.metric_results.each do |m| %>
         <li><strong><%= m.metric %></strong>: <%= m.value %><br/><small><%= m.explanation %></small></li>
