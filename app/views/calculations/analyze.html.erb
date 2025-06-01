@@ -1,0 +1,17 @@
+<h1>Результаты анализа</h1>
+
+<% if @error %>
+  <p style="color: red;"><%= @error %></p>
+<% else %>
+  <ul>
+    <% @results.each do |metric| %>
+      <li>
+        <strong><%= metric["metric"] %>:</strong> <%= metric["value"] %>
+        <br />
+        <em><%= metric["explanation"] %></em>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= link_to "Назад", "/analyze" %>

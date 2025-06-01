@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :calculations, only: [:create]
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
+  post '/analyze', to: 'calculations#analyze'
+  get '/analyze', to: 'calculations#form'
 end
   
 

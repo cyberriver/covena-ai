@@ -1,0 +1,17 @@
+<h1>Загрузка форм</h1>
+
+<%= form_with url: "/analyze", local: true, multipart: true do |f| %>
+  <div>
+    <label>Форма 1 (PDF/Excel):</label>
+    <%= file_field_tag :form1 %>
+  </div>
+  <div>
+    <label>Форма 2 (PDF/Excel):</label>
+    <%= file_field_tag :form2 %>
+  </div>
+  <div>
+    <label>Метрики (через запятую):</label>
+    <%= text_field_tag :metrics, "EBITDA,DEBT/EBITDA,Net Debt/EBITDA" %>
+  </div>
+  <%= submit_tag "Рассчитать" %>
+<% end %>
