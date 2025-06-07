@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_01_193844) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_07_175230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_193844) do
     t.string "session_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "balance_sheets", force: :cascade do |t|
+    t.bigint "financial_document_id", null: false
+    t.decimal "assets"
+    t.decimal "liabilities"
+    t.decimal "equity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["financial_document_id"], name: "index_balance_sheets_on_financial_document_id"
   end
 
   create_table "calculations", force: :cascade do |t|
@@ -39,6 +49,26 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_193844) do
     t.index ["analysis_session_id"], name: "index_chat_messages_on_analysis_session_id"
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "inn"
+    t.string "name"
+    t.text "contact_info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inn"], name: "index_companies_on_inn", unique: true
+  end
+
+  create_table "financial_documents", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.string "document_type"
+    t.date "report_date"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id", "report_date"], name: "index_financial_documents_on_company_id_and_report_date"
+    t.index ["company_id"], name: "index_financial_documents_on_company_id"
+  end
+
   create_table "metric_results", force: :cascade do |t|
     t.bigint "analysis_session_id", null: false
     t.string "metric"
@@ -47,6 +77,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_193844) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["analysis_session_id"], name: "index_metric_results_on_analysis_session_id"
+  end
+
+  create_table "profit_losses", force: :cascade do |t|
+    t.bigint "financial_document_id", null: false
+    t.decimal "revenue"
+    t.decimal "net_profit"
+    t.decimal "ebitda"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["financial_document_id"], name: "index_profit_losses_on_financial_document_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -63,8 +103,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_193844) do
     t.index ["session_id"], name: "index_uploaded_documents_on_session_id"
   end
 
+  add_foreign_key "balance_sheets", "financial_documents"
   add_foreign_key "calculations", "sessions"
   add_foreign_key "chat_messages", "analysis_sessions"
+  add_foreign_key "financial_documents", "companies"
   add_foreign_key "metric_results", "analysis_sessions"
+  add_foreign_key "profit_losses", "financial_documents"
   add_foreign_key "uploaded_documents", "sessions"
 end

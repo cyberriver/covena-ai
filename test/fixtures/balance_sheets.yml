@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  financial_document: one
+  assets: 9.99
+  liabilities: 9.99
+  equity: 9.99
+
+two:
+  financial_document: two
+  assets: 9.99
+  liabilities: 9.99
+  equity: 9.99

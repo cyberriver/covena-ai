@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  financial_document: one
+  revenue: 9.99
+  net_profit: 9.99
+  ebitda: 9.99
+
+two:
+  financial_document: two
+  revenue: 9.99
+  net_profit: 9.99
+  ebitda: 9.99

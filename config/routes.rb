@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "sessions#index"
+  root to: "chat#index"
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :uploads, only: [:create]

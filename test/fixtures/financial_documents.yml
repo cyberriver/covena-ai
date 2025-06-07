@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: one
+  document_type: MyString
+  report_date: 2025-06-07
+  status: MyString
+
+two:
+  company: two
+  document_type: MyString
+  report_date: 2025-06-07
+  status: MyString
